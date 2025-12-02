@@ -31,27 +31,32 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center">
+      <section className="relative overflow-hidden min-h-screen py-12 flex items-center">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "1s" }} />
+          <div
+            className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-linear-hero opacity-5 rounded-full blur-[80px]" />
         </div>
-        
+
         {/* Grid Pattern Overlay */}
         <div className="absolute inset-0 bg-[linear-linear(rgba(232,92,13,0.03)_1px,transparent_1px),linear-linear(90deg,rgba(232,92,13,0.03)_1px,transparent_1px)] bg-size-[50px_50px]" />
-        
+
         <div className="container mx-auto px-4 relative">
           <div className="max-w-5xl mx-auto text-center space-y-10">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm animate-fade-in">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium text-primary">Privacy-First Predictions</span>
+              <span className="text-sm font-medium text-primary">
+                Privacy-First Predictions
+              </span>
             </div>
-            
+
             {/* Main Heading */}
             <h1 className="text-6xl md:text-8xl font-bold tracking-tight animate-fade-in">
               Predict with{" "}
@@ -62,17 +67,24 @@ const Home = () => {
                 <div className="absolute inset-0 blur-2xl bg-linear-to-r from-primary to-secondary opacity-30" />
               </span>
             </h1>
-            
+
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              Privacy-first prediction markets powered by verified real-world data.
+            <p
+              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in"
+              style={{ animationDelay: "0.2s" }}
+            >
+              Privacy-first prediction markets powered by verified real-world
+              data.
               <span className="block mt-2 text-lg text-muted-foreground/80">
                 Automated outcomes. Transparent results. Zero compromises.
               </span>
             </p>
-            
+
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            <div
+              className="flex flex-col sm:flex-row gap-4 justify-center pt-6 animate-fade-in"
+              style={{ animationDelay: "0.4s" }}
+            >
               <Button
                 asChild
                 size="lg"
@@ -89,24 +101,33 @@ const Home = () => {
                 size="lg"
                 className="text-lg px-10 py-7 border-2 border-primary/30 hover:border-transparent hover:bg-white transition-smooth"
               >
-                <Link href="/markets">
-                  Explore Markets
-                </Link>
+                <Link href="/markets">Explore Markets</Link>
               </Button>
             </div>
-            
+
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto pt-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+            <div
+              className="grid grid-cols-3 gap-6 max-w-2xl mx-auto pt-12 animate-fade-in"
+              style={{ animationDelay: "0.6s" }}
+            >
               <div className="space-y-1">
-                <div className="text-3xl md:text-4xl font-bold text-primary">1000+</div>
-                <div className="text-sm text-muted-foreground">Active Users</div>
+                <div className="text-3xl md:text-4xl font-bold text-primary">
+                  1000+
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Active Users
+                </div>
               </div>
               <div className="space-y-1">
-                <div className="text-3xl md:text-4xl font-bold text-secondary">500+</div>
+                <div className="text-3xl md:text-4xl font-bold text-secondary">
+                  500+
+                </div>
                 <div className="text-sm text-muted-foreground">Markets</div>
               </div>
               <div className="space-y-1">
-                <div className="text-3xl md:text-4xl font-bold text-primary">99%</div>
+                <div className="text-3xl md:text-4xl font-bold text-primary">
+                  99%
+                </div>
                 <div className="text-sm text-muted-foreground">Accuracy</div>
               </div>
             </div>
@@ -136,7 +157,7 @@ const Home = () => {
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-smooth">
                     <feature.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
+                  <h4 className="text-xl font-bold">{feature.title}</h4>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </CardContent>
               </Card>
@@ -154,8 +175,8 @@ const Home = () => {
                 Ready to Start Predicting?
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Join thousands of users making informed predictions on real-world
-                events.
+                Join thousands of users making informed predictions on
+                real-world events.
               </p>
               <Button
                 asChild

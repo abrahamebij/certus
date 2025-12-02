@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { LogOut, TrendingUp, CheckCircle2 } from "lucide-react";
 import EventCard from "@/components/EventCard";
 import PredictionModal from "@/components/PredictionModal";
@@ -17,74 +17,15 @@ import { useRouter } from "next/navigation";
 import ResolvedMarketCard from "@/components/ResolvedMarketCard";
 import { useWallet } from "@/hooks/useWallet";
 import checkSavedAccount from "@/lib/checkSavedAccount";
-
-// Mock data
-const activeEvents = [
-  {
-    id: 1,
-    title: "Will Bitcoin reach $100k by end of 2024?",
-    description:
-      "Prediction based on verified exchange data from major platforms.",
-    endsAt: new Date("2024-12-31"),
-    participants: 1234,
-  },
-  {
-    id: 2,
-    title: "Will SpaceX launch Starship to orbit this quarter?",
-    description:
-      "Outcome verified through official SpaceX announcements and space agencies.",
-    endsAt: new Date("2024-12-31"),
-    participants: 856,
-  },
-  {
-    id: 3,
-    title: "Will global temperature rise exceed 1.5°C by 2025?",
-    description: "Data sourced from verified climate monitoring organizations.",
-    endsAt: new Date("2025-01-01"),
-    participants: 2341,
-  },
-];
-
-const resolvingEvents = [
-  {
-    id: 201,
-    title: "Will Tesla stock hit $300 by year end?",
-    description:
-      "Market closes December 31st, resolution pending final trading data.",
-    endsAt: new Date("2024-12-31"),
-    participants: 892,
-  },
-  {
-    id: 202,
-    title: "Will OpenAI release GPT-5 in 2024?",
-    description: "Awaiting official announcement from OpenAI.",
-    endsAt: new Date("2024-12-20"),
-    participants: 1567,
-  },
-];
-
-const resolvedEvents = [
-  {
-    id: 101,
-    title: "Would AI pass the Turing test in 2024?",
-    outcome: true,
-    userPrediction: true,
-    resolvedAt: new Date("2024-11-15"),
-  },
-  {
-    id: 102,
-    title: "Will Ethereum 2.0 launch in Q3 2024?",
-    outcome: false,
-    userPrediction: true,
-    resolvedAt: new Date("2024-10-01"),
-  },
-];
+import { useMarketStore } from "@/stores/marketStore";
+import Link from "next/link";
+import { FaPlus } from "react-icons/fa";
 
 const Markets = () => {
   const router = useRouter();
-  const [selectedEvent, setSelectedEvent] = useState<
-    (typeof activeEvents)[0] | null
-  >(null);
+  const markets = useMarketStore((state) => state.markets);
+  const addPrediction = useMarketStore((state) => state.addPrediction);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [predictionType, setPredictionType] = useState<"yes" | "no" | null>(
     null
   );
@@ -97,16 +38,16 @@ const Markets = () => {
     router.push("/");
   };
 
-  const handlePredict = (
-    event: (typeof activeEvents)[0],
-    type: "yes" | "no"
-  ) => {
+  const handlePredict = (event: any, type: "yes" | "no") => {
     setSelectedEvent(event);
     setPredictionType(type);
   };
 
   const handleConfirmPrediction = () => {
-    toast.success(`Prediction placed: ${predictionType?.toUpperCase()}`);
+    if (selectedEvent && predictionType) {
+      addPrediction(selectedEvent.id, predictionType);
+      toast.success(`Prediction placed: ${predictionType?.toUpperCase()}`);
+    }
     setSelectedEvent(null);
     setPredictionType(null);
   };
@@ -131,20 +72,15 @@ const Markets = () => {
     );
   } else {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative">
         {/* Header */}
         <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold tracking-tight">
+              <Link href={"/"} className="text-2xl font-bold tracking-tight">
                 <span className="text-primary">Certus</span>
-              </h1>
+              </Link>
               <div className="flex items-center gap-4">
-                <Avatar className="h-10 w-10 border-2 border-primary">
-                  <AvatarFallback className="bg-primary/10 text-primary font-bold">
-                    0x
-                  </AvatarFallback>
-                </Avatar>
                 <Button
                   variant="outline"
                   size="sm"
@@ -162,18 +98,28 @@ const Markets = () => {
         <div className="container mx-auto px-4 py-8 space-y-12">
           {/* Active Markets */}
           <section>
-            <div className="flex items-center gap-3 mb-6">
-              <TrendingUp className="h-6 w-6 text-primary" />
-              <h2 className="text-3xl font-bold">Active Markets</h2>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <TrendingUp className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold">Active Markets</h2>
+              </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {activeEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  onPredict={handlePredict}
-                />
-              ))}
+              {markets
+                .filter((m) => m.status === "active")
+                .map((market) => (
+                  <EventCard
+                    key={market.id}
+                    event={{
+                      id: market.id,
+                      title: market.title,
+                      description: market.description,
+                      endsAt: new Date(market.deadline),
+                      participants: market.participants,
+                    }}
+                    onPredict={handlePredict}
+                  />
+                ))}
             </div>
           </section>
 
@@ -184,27 +130,29 @@ const Markets = () => {
               <h2 className="text-3xl font-bold">Resolving Markets</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              {resolvingEvents.map((event) => (
-                <Card
-                  key={event.id}
-                  className="border-2 border-secondary/30 bg-secondary/5"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-lg">{event.title}</CardTitle>
-                    <CardDescription>{event.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-secondary font-medium">
-                        Resolving...
-                      </span>
-                      <span className="text-muted-foreground">
-                        {event.participants} participants
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              {markets
+                .filter((m) => m.status === "resolving")
+                .map((market) => (
+                  <Card
+                    key={market.id}
+                    className="border-2 border-secondary/30 bg-secondary/5"
+                  >
+                    <CardHeader>
+                      <CardTitle className="text-lg">{market.title}</CardTitle>
+                      <CardDescription>{market.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-secondary font-medium">
+                          Resolving...
+                        </span>
+                        <span className="text-muted-foreground">
+                          {market.participants} participants
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
             </div>
           </section>
 
@@ -215,9 +163,11 @@ const Markets = () => {
               <h2 className="text-3xl font-bold">Resolved Markets</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              {resolvedEvents.map((event) => (
-                <ResolvedMarketCard key={event.id} event={event} />
-              ))}
+              {markets
+                .filter((m) => m.status === "resolved" && m.resolvedAt)
+                .map((market) => (
+                  <ResolvedMarketCard key={market.id} event={market as any} />
+                ))}
             </div>
           </section>
         </div>
@@ -234,6 +184,15 @@ const Markets = () => {
             }}
           />
         )}
+
+        <Button
+          className="flex justify-center items-center size-12 fixed bg-primary text-white bottom-6 right-6 text-5xl rounded-full"
+          title="Create a new market"
+        >
+          <Link href={"/markets/new"}>
+            <FaPlus />
+          </Link>
+        </Button>
       </div>
     );
   }
