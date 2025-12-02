@@ -41,9 +41,9 @@ const PredictionModal = ({
             {event.title}
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-4 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="prediction" className="text-base font-medium">
+        <div className="flex flex-col gap-4 py-4">
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="prediction" className="text-base font-medium mb-1">
               Your Prediction
             </Label>
             <div
@@ -56,8 +56,8 @@ const PredictionModal = ({
               {predictionType.toUpperCase()}
             </div>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="amount" className="text-base font-medium">
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="amount" className="text-base font-medium mb-1">
               Stake Amount (Test Tokens)
             </Label>
             <Input

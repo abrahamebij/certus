@@ -37,7 +37,7 @@ const Login = () => {
           <div className="space-y-3">
             {account ? (
               <p className="text-center text-sm font-medium p-4 bg-primary/10 border border-primary rounded-lg relative">
-                Connected: {account.slice(0, 2)}...{account.slice(-4)}
+                Connected: {account.slice(0, 7)}...{account.slice(-5)}
                 <span className="block absolute -top-1 -right-1 size-4 rounded-full bg-primary animate-pulse"></span>
               </p>
             ) : (

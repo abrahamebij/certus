@@ -1,18 +1,26 @@
-"use client"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Clock, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface EventCardProps {
-  event: {
-    id: number;
-    title: string;
-    description: string;
-    endsAt: Date;
-    participants: number;
-  };
+  event: Event;
   onPredict: (event: EventCardProps["event"], type: "yes" | "no") => void;
+}
+
+export interface Event {
+  id: number;
+  title: string;
+  description: string;
+  endsAt: Date;
+  participants: number;
 }
 
 const EventCard = ({ event, onPredict }: EventCardProps) => {
@@ -26,7 +34,9 @@ const EventCard = ({ event, onPredict }: EventCardProps) => {
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
     if (days > 0) {
@@ -46,7 +56,7 @@ const EventCard = ({ event, onPredict }: EventCardProps) => {
     }, 60000);
 
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event.endsAt]);
 
   return (
@@ -65,7 +75,9 @@ const EventCard = ({ event, onPredict }: EventCardProps) => {
           </div>
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4" />
-            <span className="font-medium">{event.participants.toLocaleString()}</span>
+            <span className="font-medium">
+              {event.participants.toLocaleString()}
+            </span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
