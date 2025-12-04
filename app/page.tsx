@@ -195,7 +195,8 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground">
-              © 2024 Certus. Built for the Hackathon.
+              © {new Date().getFullYear()} Certus. Built for the Canton
+              Hackathon.
             </div>
             <div className="flex gap-6">
               <a
