@@ -11,6 +11,7 @@ import { Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useWallet } from "@/hooks/useWallet";
 import { useEffect } from "react";
+import Img from "@/components/ui/Img";
 
 const Login = () => {
   const router = useRouter();
@@ -19,12 +20,13 @@ const Login = () => {
 
   useEffect(() => {
     if (isConnected) router.push("/markets");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConnected]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-linear-to-br from-background via-muted/20 to-background">
       <Card className="w-full max-w-md border-2 shadow-card">
+        <Img src="/logo.png" alt="Certus Logo" className="w-16 mx-auto" />
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold">
             Login to <span className="text-primary">Certus</span>

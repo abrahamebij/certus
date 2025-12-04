@@ -1,184 +1,136 @@
+# **Certus — Decentralised Prediction Markets (Frontend Prototype)**
 
-# Aegis Assault  
+![Project Screenshot](https://i.ibb.co/twWxY9qk/image.png)
 
-*The On‑Chain Arena Shooter with an AI‑Powered Strategist*  
+## **🚀 Overview**
 
-![Cover Image](https://i.ibb.co/mC1J1s7n/Gemini-Generated-Image-w30l4uw30l4uw30l.png)
+**Certus** is a decentralised prediction-market platform built to demonstrate how users can create, participate in, and resolve markets around real-world events.
+This prototype showcases the user experience end-to-end — wallet connection, browsing markets, and opening new markets — using **two demo categories (Weather + Crypto)** and simulated oracle resolution.
 
-## 🚀 Overview  
-
-You are the Aegis Core. Locked at the centre of the arena, you must defend yourself against endless, evolving waves of enemies. Aim with your mouse, destroy the swarm, and fight for your place on the blockchain. :contentReference[oaicite:0]{index=0}  
-This isn't just another web shooter—built with modern tech (Phaser 3, Next.js, Zustand) and integrated with blockchain and AI, **Aegis Assault** proves that web‑games can be trustable, persistent, and strategic.
-
-## 📍 Play Now  
-
-Check out the live demo: [aegis-assault.vercel.app](https://aegis-assault.vercel.app/)
-
-![Demo Gif](https://i.ibb.co/20nzSmkD/ezgif-77b4384b819f1e6c.gif)
-
-## 🎮 Core Features  
-
-### Game Mechanics
-
-- Intuitive movement & shooting using Phaser.js  
-- Wave‑based enemy spawning: dwarfs like **Darter**, **Brute**, **Splitter** join the fight.
-- XP‑based leveling system: choose upgrades (temporary or permanent) as you progress  
-- Health, collision detection, particle effects  
-- Battle music and SFX for immersive gameplay  
-- Tutorial and pause functionality built in  
-
-### Web3 Integration
-
-- Wallet authentication (session tracking via wallet address)  
-- On‑chain score storage: every run is logged to Somnia blockchain via its Streams SDK, making leaderboards verifiable and immutable. :contentReference[oaicite:6]{index=6}  
-- NFT ship‑skins and soul‑bound tokens (SBTs) for achievements  
-- Real‑time, on‑chain leaderboard  
-
-### AI Strategy Assistant (“Oracle”)  
-
-- Tracks game statistics like `finalScore`, `timeSurvived`, `enemyKillCount`, `finalBuild`  
-- Uses Amazon Q to analyse your performance data and offer personalised advice: upgrade priorities, survival tactics, improvement areas. :contentReference[oaicite:8]{index=8}  
-- Helps you turn your run into a strategy, not just reflexes.  
-
-### Data Management & UX  
-
-- Local storage persistence (via your `gameDatabase` system) for cross‑session continuity  
-- Real‑time leaderboard with wallet highlighting and ranking  
-- Modern React UI components styled with Tailwind CSS (primary: `#E85C0D`, secondary: `#FABC3F`)  
-- Zustand‑based state management for game & UI states  
-- Responsive design, gradient themes, smooth animations  
-
-## 🎯 Problem & Solution  
-
-**Problem:** Web‑based games often lack verifiable scores, persistent player progress and strategic guidance. Leaderboards can be manipulated or untrusted.  
-**Solution:** Aegis Assault gives you trustable leaderboards, persistent progress on‑chain and an AI guide to improve your play—all within a modern web experience.  
-
-## 📦 Tech Stack  
-
-- **Frontend:** Next.js + React, Tailwind CSS  
-- **Game Engine:** Phaser 3  
-- **State Management:** Zustand  
-- **Blockchain:** Somnia (Streams SDK)  
-- **Wallet / Auth:** iron‑session + viem  
-- **AI:** Amazon Q  
-- **Backend:** AWS Lambda (serverless functions)  
-- **Stats Tracking:** Local + on‑chain sync  
-
-## ✅ Next Steps / Roadmap  
-
-1. Add a feature to stake SOMI with other players
-2. Polish audio and visual feedback (particle effects, cinematics)  
-3. Expand enemy types, upgrade tree, difficulty scaling  
-4. Deepen AI assistant: longer‑term player tracking, custom recommendations  
-5. Enable user‑generated skins + marketplace  
-6. Add social features: clans, team leaderboards  
-7. Launch on testnet → mainnet, invite early players  
-
-## 🛠 Project Structure  
-
-``` bash
-└── 📁aegis-assault
-    └── 📁actions
-        ├── combat.ts
-        ├── spawning.ts
-        ├── state.ts
-    └── 📁app
-        └── 📁api
-            └── 📁auth
-                └── 📁logout
-                    ├── route.ts
-                └── 📁me
-                    ├── route.ts
-                └── 📁nonce
-                    ├── route.ts
-                └── 📁verify
-                    ├── route.ts
-            └── 📁leaderboard
-                ├── route.ts
-            └── 📁strategist
-                ├── route.ts
-            └── 📁submit-score
-                ├── route.ts
-        └── 📁leaderboard
-            ├── page.tsx
-        └── 📁login
-            ├── page.tsx
-        └── 📁play
-            ├── page.tsx
-        ├── favicon.ico
-        ├── globals.css
-        ├── layout.tsx
-        ├── page.tsx
-    └── 📁assets
-        ├── hero-gameplay.jpg
-    └── 📁components
-        └── 📁game
-            ├── Loader.tsx
-        └── 📁home
-            ├── FinalCTA.tsx
-            ├── Gameplay.tsx
-            ├── Hero.tsx
-            ├── Innovation.tsx
-            ├── Leaderboard.tsx
-            ├── TechStack.tsx
-        └── 📁ui
-            ├── button.tsx
-            ├── card.tsx
-            ├── Img.tsx
-            ├── table.tsx
-        ├── GameCanvas.tsx
-        ├── GameOverScreen.tsx
-        ├── GameTutorial.tsx
-        ├── LevelUpScreen.tsx
-        ├── PauseScreen.tsx
-    └── 📁config
-        ├── gameConfig.ts
-        ├── upgrades.ts
-    └── 📁contexts
-        ├── UserContext.tsx
-    └── 📁lib
-        ├── button-variants.ts
-        ├── gameDatabase.ts
-        ├── server.ts
-        ├── session.ts
-        ├── somnia.ts
-        ├── utils.ts
-    └── 📁providers
-        ├── index.tsx
-    └── 📁public
-        └── 📁assets
-        └── 📁icons
-        └── 📁img
-        └── 📁music
-    └── 📁scenes
-        ├── MainScene.ts
-    └── 📁stores
-        ├── gameStore.ts
-    └── 📁types
-        ├── leaderboard.ts
-    └── 📁utils
-        ├── config.ts
-        ├── gameVariables.ts
-    ├── .env
-    ├── .gitignore
-    ├── components.json
-    ├── eslint.config.mjs
-    ├── next-env.d.ts
-    ├── next.config.ts
-    ├── package-lock.json
-    ├── package.json
-    ├── postcss.config.mjs
-    ├── README.md
-    └── tsconfig.json
-```
-
-## 🧑‍💻 Contributors  
-
-- **Abraham Ebijuni** – Game design, Web3 integration, AI strategy assistant  
-- Amazon Q
+The full vision integrates **AI-powered question parsing** to map any written question to the correct external data source.
+This demo uses **predefined markets** to illustrate the flow.
 
 ---
 
-Feel free to fork, build and contribute. Defend the core. Secure your legacy.
+## **🧩 Problem Statement**
 
-This was greatly inspired by [a video on Chris Courses](https://youtu.be/eI9idPTT0c4?si=qQy2jPRZj-QibQYi)
+Prediction markets today struggle with **trust**, **data sourcing**, and **complex UX**.
+Users often rely on opaque or centralised systems to validate outcomes, making participation risky or inaccessible.
+
+**Certus** explores how decentralised rails + controlled data sources can produce a safer, transparent, and user-friendly prediction environment.
+
+---
+
+## **Live Demo**
+
+[https://certus-bice.vercel.app/](https://certus-bice.vercel.app/)
+
+![Video Demo](https://i.ibb.co/XxGtDhgj/ezgif-7f8003d49da74e4b.gif)
+
+---
+
+## **💡 Solution Summary**
+
+* 🔐 **Wallet-based Access** — Users connect using a Web3 wallet (MetaMask simulation in this prototype).
+* 🎯 **Two Demo Market Types** —
+
+  * **Weather Example:** *“Will Lagos be sunny tomorrow?”*
+  * **Crypto Example:** *“Will BTC close above $100K this week?”*
+* 🧠 **AI Vision (Future)** — Free-form natural language questions parsed, categorised, and auto-linked to correct data sources.
+* 📊 **Market Interaction** — Create markets, view probabilities, vote Yes/No, and view results.
+* 🛰️ **Oracle Simulation** — In the frontend demo, outcomes resolve via pre-seeded values.
+
+---
+
+## **📦 Folder Structure**
+
+```sh
+/app
+    page.tsx
+    globals.css
+    /login
+    /markets
+    /new
+/components
+    /ui
+/hooks
+    useWallet.ts
+/lib
+/public
+/stores
+/types
+```
+
+---
+
+## **🛠️ Running the Prototype**
+
+### **1. Clone the Repository**
+
+```bash
+git clone https://github.com/abrahamebij/certus.git
+cd certus
+```
+
+### **2. Install Dependencies**
+
+```bash
+npm install
+```
+
+### **3. Start the Dev Server**
+
+```bash
+npm run dev
+```
+
+Visit **[http://localhost:3000](http://localhost:3000)**
+You should see the landing page.
+
+---
+
+## **🧪 Testing Instructions (For Judges)**
+
+![User Flow](https://i.ibb.co/KpTGMdRC/unnamed-1.jpg)
+
+Since this is a frontend-only prototype:
+
+1. **Open the app**
+   → Landing page, branding + mission.
+
+2. **Go to Login**
+   → Click “Connect Wallet”.
+   → Wallet connection is real, please install Metamask extension first.
+
+3. **Explore Markets**
+   → Two demo markets appear (Weather + Crypto).
+   → Try voting “Yes” or “No”.
+
+4. **Open a Market**
+   → Click “Create Market”.
+   → Choose Weather or Crypto.
+   → Fill the quick form and submit.
+   → Your new market appears instantly (local state).
+
+5. **View Resolution**
+   → Markets resolve automatically via mocked data.
+
+No backend, no blockchain, no real oracles — **just UX demonstration**.
+
+---
+
+## **🧭 Vision Beyond the Demo**
+
+* AI-driven question classification
+* Canton-style privacy for market data
+* Real on-chain DASM contracts
+* Automated oracle feeds
+* User reputation & staking mechanics
+
+---
+
+## **📝 Additional Files**
+
+* `/public` — Logo
+* `/docs` — Supporting Documents
+  

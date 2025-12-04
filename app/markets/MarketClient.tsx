@@ -20,6 +20,7 @@ import checkSavedAccount from "@/lib/checkSavedAccount";
 import { useMarketStore } from "@/stores/marketStore";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
+import Img from "@/components/ui/Img";
 
 const MarketClient = () => {
   const router = useRouter();
@@ -77,7 +78,12 @@ const MarketClient = () => {
         <header className="border-b bg-card/50 backdrop-blur sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              <Link href={"/"} className="text-2xl font-bold tracking-tight">
+              <Link
+                href={"/"}
+                className="text-2xl flex gap-2 items-center font-bold tracking-tight"
+              >
+                <Img src="/logo.png" alt="Certus Logo" className="w-7" />
+
                 <span className="text-primary">Certus</span>
               </Link>
               <div className="flex items-center gap-4">
