@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
 import { FaTimes } from "react-icons/fa";
 
 import { cn } from "@/lib/utils";
